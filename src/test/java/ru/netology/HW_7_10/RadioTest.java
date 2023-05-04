@@ -2,63 +2,165 @@ package ru.netology.HW_7_10;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class RadioTest {
-    @Test
-    public void shouldSetStation() {
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "setStationParameter.csv")
+    public void shouldSetCurrentStationParametrized(int currentStation, int expected) {
         Radio radio = new Radio();
-
-        radio.currentStation = 9;
-
-        int expected = 9;
-        int actual = radio.currentStation;
-
+        radio.setCurrentStation(currentStation);
+        int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
-        System.out.println("Текущая радиостанция " + radio.currentStation);
+        System.out.println("Текущая радиостанция " + radio.getCurrentStation());
     }
 
-    @Test
-    public void shouldSetNextStation() {
+//    @Test
+//    public void shouldSetStation() {
+//        Radio radio = new Radio();
+//
+//        radio.setCurrentStation(10);
+//
+//        int expected = 0;
+//        int actual = radio.getCurrentStation();
+//
+//        Assertions.assertEquals(expected, actual);
+//        System.out.println("Текущая радиостанция " + radio.getCurrentStation());
+//    }
+
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "nextStationParameter.csv")
+    public void shouldSetNextStationParametrized(int currentStation, int expected) {
         Radio radio = new Radio();
+        radio.setCurrentStation(currentStation);
+        System.out.print("Текущая радиостанция " + radio.getCurrentStation() + ", ");
+        radio.setNextStation(currentStation);
 
-        radio.currentStation = 9;
-        radio.setNextStation();
-
-        int expected = 0;
-        int actual = radio.currentStation;
-
+        int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
-        System.out.println("Следующая радиостанция " + radio.currentStation);
+        System.out.println("Следующая радиостанция " + radio.getCurrentStation());
     }
 
-    @Test
-    public void shouldSetPrevStation() {
+//    @Test
+//    public void shouldSetNextStation() {
+//        Radio radio = new Radio();
+//
+//        radio.setCurrentStation(8);
+//        System.out.print("Текущая радиостанция " + radio.getCurrentStation() + ", ");
+//        radio.setNextStation(radio.getCurrentStation());
+//
+//        int expected = 9;
+//        int actual = radio.getCurrentStation();
+//
+//        Assertions.assertEquals(expected, actual);
+//        System.out.println("Следующая радиостанция " + radio.getCurrentStation());
+//    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "prevStationParameter.csv")
+    public void shouldSetPrevStationParametrized(int currentStation, int expected) {
         Radio radio = new Radio();
+        radio.setCurrentStation(currentStation);
+        System.out.print("Текущая радиостанция " + radio.getCurrentStation() + ", ");
+        radio.setPrevStation(currentStation);
 
-        radio.currentStation = 9;
-        radio.setPrevStation();
-
-
-        int expected = 8;
-        int actual = radio.currentStation;
-
+        int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
-        System.out.println("Предыдущая радиостанция " + radio.currentStation);
+        System.out.println("Предыдущая радиостанция " + radio.getCurrentStation());
     }
 
-    @Test
-    public void shouldSetVolume() {
+
+//    @Test
+//    public void shouldSetPrevStation() {
+//        Radio radio = new Radio();
+//
+//        radio.setCurrentStation(0);
+//        System.out.print("Текущая радиостанция " + radio.getCurrentStation() + ", ");
+//        radio.setPrevStation(radio.getCurrentStation());
+//
+//        int expected = 9;
+//        int actual = radio.getCurrentStation();
+//
+//        Assertions.assertEquals(expected, actual);
+//        System.out.println("Предыдущая радиостанция " + radio.getCurrentStation());
+//    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "setVolumeParameter.csv")
+    public void shouldSetCurrentVolumeParametrized(int currentVolume, int expected) {
         Radio radio = new Radio();
-
-        radio.currentVolume = 30;
-
-        int expected = 30;
-        int actual = radio.currentVolume;
-
+        radio.setCurrentVolume(currentVolume);
+        int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
-        System.out.println("Текущий уровень громкости  " + radio.currentVolume);
+        System.out.println("Текущая громкость " + radio.getCurrentVolume());
     }
+
+//    @Test
+//    public void shouldSetVolume() {
+//        Radio radio = new Radio();
+//
+//        radio.setCurrentVolume(-10);
+//
+//        int expected = 0;
+//        int actual = radio.getCurrentVolume();
+//
+//        Assertions.assertEquals(expected, actual);
+//        System.out.println("Текущий уровень громкости  " + radio.getCurrentVolume());
+//    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "increaseVolumeParameter.csv")
+    public void shouldIncreaseVolume(int currentVolume, int expected) {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(currentVolume);
+        System.out.print("Текущий уровень громкости  " + radio.getCurrentVolume() + ", ");
+        radio.setIncreaseVolume(currentVolume);
+        int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+        System.out.println("После повышение получаем " + radio.getCurrentVolume());
+    }
+
+//    @Test
+//    public void increaseVolume() {
+//        Radio radio = new Radio();
+//
+//        radio.setCurrentVolume(0);
+//        System.out.print("Прошлый уровень громкости  " + radio.getCurrentVolume() + ", ");
+//        radio.setIncreaseVolume(radio.getCurrentVolume());
+//
+//        int expected = 1;
+//        int actual = radio.getCurrentVolume();
+//        Assertions.assertEquals(expected, actual);
+//        System.out.println("Новый уровень громкости  " + radio.getCurrentVolume());
+//    }
+
+    @ParameterizedTest
+    @CsvFileSource (resources="decreaseVolumeParameter.csv")
+    public void shouldDecreaseVolume(int currentVolume, int expected) {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(currentVolume);
+        System.out.print("Текущий уровень громкости " + radio.getCurrentVolume() + ", ");
+        radio.setDecreaseVolume(currentVolume);
+        int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+        System.out.println("После уменьшения получаем " + radio.getCurrentVolume());
+    }
+
+//    @Test
+//    public void decreaseVolume() {
+//        Radio radio = new Radio();
+//
+//        radio.setCurrentVolume(5);
+//        System.out.print("Текущий уровень громкости  " + radio.getCurrentVolume() + ", ");
+//        radio.setDecreaseVolume(radio.getCurrentVolume());
+//
+//        int expected = 4;
+//        int actual = radio.getCurrentVolume();
+//        Assertions.assertEquals(expected, actual);
+//        System.out.println("После уменьшения получаем  " + radio.getCurrentVolume());
+//    }
 
 }
