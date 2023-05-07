@@ -117,7 +117,7 @@ class RadioTest {
         Radio radio = new Radio();
         radio.setCurrentVolume(currentVolume);
         System.out.print("Текущий уровень громкости  " + radio.getCurrentVolume() + ", ");
-        radio.setIncreaseVolume(currentVolume);
+        radio.increaseVolume();
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
         System.out.println("После повышение получаем " + radio.getCurrentVolume());
@@ -127,23 +127,23 @@ class RadioTest {
 //    public void increaseVolume() {
 //        Radio radio = new Radio();
 //
-//        radio.setCurrentVolume(0);
+//        radio.setCurrentVolume(101);
 //        System.out.print("Прошлый уровень громкости  " + radio.getCurrentVolume() + ", ");
-//        radio.setIncreaseVolume(radio.getCurrentVolume());
+//        radio.increaseVolume();
 //
-//        int expected = 1;
+//        int expected = 100;
 //        int actual = radio.getCurrentVolume();
 //        Assertions.assertEquals(expected, actual);
 //        System.out.println("Новый уровень громкости  " + radio.getCurrentVolume());
 //    }
 
     @ParameterizedTest
-    @CsvFileSource (resources="decreaseVolumeParameter.csv")
+    @CsvFileSource(resources = "decreaseVolumeParameter.csv")
     public void shouldDecreaseVolume(int currentVolume, int expected) {
         Radio radio = new Radio();
         radio.setCurrentVolume(currentVolume);
         System.out.print("Текущий уровень громкости " + radio.getCurrentVolume() + ", ");
-        radio.setDecreaseVolume(currentVolume);
+        radio.decreaseVolume();
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
         System.out.println("После уменьшения получаем " + radio.getCurrentVolume());
@@ -152,12 +152,13 @@ class RadioTest {
 //    @Test
 //    public void decreaseVolume() {
 //        Radio radio = new Radio();
+//        radio.setCurrentVolume(101);
 //
-//        radio.setCurrentVolume(5);
 //        System.out.print("Текущий уровень громкости  " + radio.getCurrentVolume() + ", ");
-//        radio.setDecreaseVolume(radio.getCurrentVolume());
 //
-//        int expected = 4;
+//        radio.decreaseVolume();
+//
+//        int expected = 99;
 //        int actual = radio.getCurrentVolume();
 //        Assertions.assertEquals(expected, actual);
 //        System.out.println("После уменьшения получаем  " + radio.getCurrentVolume());
