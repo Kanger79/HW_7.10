@@ -37,7 +37,7 @@ public class Radio {
         if (newCurrentStation == 9) {
             newCurrentStation = 0;
         } else {
-            newCurrentStation =newCurrentStation + 1;
+            newCurrentStation = newCurrentStation + 1;
         }
         currentStation = newCurrentStation;
 
